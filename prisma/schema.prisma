@@ -8,12 +8,12 @@ datasource db {
 }
 
 model User {
-  id        String     @id @default(uuid())
-  email     String     @unique
-  password  String
-  profile   Profile?
-  chatDatas chatData[]
-  chat      Chat[]
+  id                String           @id @default(uuid())
+  email             String           @unique
+  password          String
+  profile           Profile?
+  PetSittingOffer   PetSittingOffer? @relation(fields: [petSittingOfferId], references: [id])
+  petSittingOfferId String?
 }
 
 model Profile {
@@ -21,68 +21,30 @@ model Profile {
   user        User        @relation(fields: [userId], references: [id])
   userId      String      @unique
   serviceRole serviceRole @default(Owner)
-  fullName    String      @unique
-  age         Int
-  price       Float
-  pets        String[]
-  services    String[]
-  city        String
-  published   Boolean     @default(false)
-  position    Json
-  bio         String
-  headLine    String
+  name        String      @unique
   role        Role        @default(USER)
-  image       String
   ownedPets   Pet[]
 }
 
 model Pet {
-  id              String   @id @default(uuid())
-  name            String
-  services        String[]
-  age             Int
-  price           String
-  place           String
-  spiece          String
-  position        Json
-  image           String
-  startDate       DateTime
-  endDate         DateTime
-  createdDate     DateTime
-  duration        String
-  requestedBy     String[]
-  accepted        String[]
-  rejected        String[]
-  ownerName       String
-  ownerId         String   @unique
-  profile         Profile? @relation(fields: [profileFullName], references: [fullName])
-  profileFullName String?
+  id      String   @id @default(uuid())
+  name    String
+  age     Int
+  spiece  String
+  userId  String   @unique
+  profile Profile? @relation(fields: [userId], references: [id])
 }
 
-model chatData {
-  id        String   @id @default(uuid())
-  about     String
-  users     Json
-  usersids  String[] @unique
-  lastseen  Json
-  stringids String   @unique
-  images    Json
-  from      String
-  lmsg      String
-  time      DateTime
-  chat      Chat?
-  user      User[]
-}
-
-model Chat {
-  id         String   @id @default(uuid())
-  about      String
-  chatIds    String   @unique
-  ids        String   @unique
-  chat       Json[]
-  chatData   chatData @relation(fields: [chatDataId], references: [id])
-  chatDataId String   @unique
-  user       User[]
+model PetSittingOffer {
+  id          String   @id @default(uuid())
+  services    String[]
+  price       Int
+  city        String
+  startDate   DateTime
+  endDate     DateTime
+  createdDate DateTime @default(now())
+  requestedBy User[]
+  accepted    String[]
 }
 
 enum Role {
