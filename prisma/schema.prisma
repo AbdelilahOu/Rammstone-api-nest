@@ -6,3 +6,8 @@ datasource db {
   provider = "sqlite"
   url      = "file:../db.sqlite"
 }
+
+model User {
+  id   Int    @id @default(autoincrement())
+  name String
+}
