@@ -10,7 +10,7 @@ export class UserService {
     return await this.prisma.user.findMany();
   }
 
-  async getUser(id: number) {
+  async getUser(id: string) {
     return await this.prisma.user.findUnique({
       where: {
         id,
@@ -24,7 +24,7 @@ export class UserService {
     });
   }
 
-  async updateUser(id: number, user: Prisma.UserUpdateInput) {
+  async updateUser(id: string, user: Prisma.UserUpdateInput) {
     return await this.prisma.user.update({
       where: {
         id,
@@ -33,7 +33,7 @@ export class UserService {
     });
   }
 
-  async deleteUser(id: number) {
+  async deleteUser(id: string) {
     return await this.prisma.user.delete({
       where: {
         id,

@@ -20,7 +20,7 @@ export class UserController {
   }
 
   @Get(':id')
-  getUser(@Param('id') id: number) {
+  getUser(@Param('id') id: string) {
     return this.userService.getUser(id);
   }
 
@@ -31,14 +31,14 @@ export class UserController {
 
   @Put(':id')
   updateUser(
-    @Param() id: number,
+    @Param() id: string,
     @Body('User') User: Partial<Omit<User, 'id'>>,
   ) {
     return this.userService.updateUser(id, User);
   }
 
   @Delete(':id')
-  deleteUser(@Param('id') id: number) {
+  deleteUser(@Param('id') id: string) {
     return this.userService.deleteUser(id);
   }
 }
