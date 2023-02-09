@@ -8,14 +8,12 @@ datasource db {
 }
 
 model User {
-  id         String    @id @default(uuid())
-  email      String    @unique
-  password   String
-  profile    Profile?
-  chatData   chatData? @relation(fields: [chatDataId], references: [id])
-  chatDataId String?
-  Chat       Chat?     @relation(fields: [chatId], references: [id])
-  chatId     String?
+  id        String     @id @default(uuid())
+  email     String     @unique
+  password  String
+  profile   Profile?
+  chatDatas chatData[]
+  chat      Chat[]
 }
 
 model Profile {
@@ -36,8 +34,6 @@ model Profile {
   role        Role        @default(USER)
   image       String
   ownedPets   Pet[]
-  chatDatas   chatData[]
-  chat        Chat[]
 }
 
 model Pet {
@@ -64,33 +60,29 @@ model Pet {
 }
 
 model chatData {
-  id              String   @id @default(uuid())
-  about           String
-  users           Json
-  usersids        String[] @unique
-  lastseen        Json
-  stringids       String   @unique
-  images          Json
-  from            String
-  lmsg            String
-  time            DateTime
-  chat            Chat?
-  user            User[]
-  profile         Profile? @relation(fields: [profileFullName], references: [fullName])
-  profileFullName String?
+  id        String   @id @default(uuid())
+  about     String
+  users     Json
+  usersids  String[] @unique
+  lastseen  Json
+  stringids String   @unique
+  images    Json
+  from      String
+  lmsg      String
+  time      DateTime
+  chat      Chat?
+  user      User[]
 }
 
 model Chat {
-  id              String   @id @default(uuid())
-  about           String
-  chatIds         String   @unique
-  ids             String   @unique
-  chat            Json[]
-  chatData        chatData @relation(fields: [chatDataId], references: [id])
-  chatDataId      String   @unique
-  user            User[]
-  profile         Profile? @relation(fields: [profileFullName], references: [fullName])
-  profileFullName String?
+  id         String   @id @default(uuid())
+  about      String
+  chatIds    String   @unique
+  ids        String   @unique
+  chat       Json[]
+  chatData   chatData @relation(fields: [chatDataId], references: [id])
+  chatDataId String   @unique
+  user       User[]
 }
 
 enum Role {
