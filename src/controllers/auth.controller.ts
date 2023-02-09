@@ -1,13 +1,13 @@
 import { Controller, Post } from '@nestjs/common';
+import { AuthService } from 'src/services/auth.service';
 
-@Controller()
+@Controller('auth')
 export class AuthController {
-  @Post('/login')
-  async Login() {}
+  constructor(private authService: AuthService) {}
 
-  @Post('/logout')
-  async Logout() {}
+  @Post('signin')
+  async signin() {}
 
-  @Post('/register')
-  async register() {}
+  @Post('signup')
+  async signup() {}
 }
