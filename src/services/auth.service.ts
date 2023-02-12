@@ -7,18 +7,26 @@ import { SignInDto, SignUpDto } from 'src/models';
 export class AuthService {
   constructor(private prisma: PrismaService) {}
 
-  signin(user: SignInDto) {}
+  signin(user: SignInDto) {
+    try {
+    } catch (error) {
+      return error;
+    }
+  }
 
   async signup(user: SignUpDto) {
     // hash the password
-    const hash = await argon.hash(user.password);
-    const createdUser = await this.prisma.user.create({
-      data: {
-        email: user.email,
-        password: hash,
-      },
-    });
-
-    return createdUser;
+    try {
+      const hash = await argon.hash(user.password);
+      const createdUser = await this.prisma.user.create({
+        data: {
+          email: user.email,
+          password: hash,
+        },
+      });
+      return createdUser ? createdUser : 'coudnt create the user';
+    } catch (error) {
+      return error;
+    }
   }
 }
