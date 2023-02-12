@@ -1,4 +1,3 @@
-import { UserService } from 'src/services/user.service';
 import { User } from '@prisma/client';
 import {
   Controller,
@@ -9,6 +8,7 @@ import {
   Get,
   Put,
 } from '@nestjs/common';
+import { UserService } from 'src/services/user.service';
 
 @Controller('user')
 export class UserController {
