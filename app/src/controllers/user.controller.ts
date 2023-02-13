@@ -8,10 +8,13 @@ import {
   Get,
   Put,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { UserService } from 'src/services/user.service';
 import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from 'src/utils/user.decorator';
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -21,10 +24,10 @@ export class UserController {
     return this.userService.getAllUsers();
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
-  getUser(@Param('id') id: string) {
-    return this.userService.getUser(id);
+  getCurrent(@GetUser() user: User) {
+    console.log(user);
+    return 'aaaaaaaa';
   }
 
   @Post()
