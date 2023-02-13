@@ -15,6 +15,9 @@ export class UserService {
       where: {
         id,
       },
+      include: {
+        profile: true,
+      },
     });
   }
 

@@ -7,8 +7,10 @@ import {
   Post,
   Get,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from 'src/services/user.service';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('user')
 export class UserController {
@@ -19,6 +21,7 @@ export class UserController {
     return this.userService.getAllUsers();
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   getUser(@Param('id') id: string) {
     return this.userService.getUser(id);

@@ -10,12 +10,8 @@ services:
       POSTGRES_DB: ${DB_NAME}
     ports:
       - 5432:5432
-    expose:
-      - 5432
-  app:
-    build: ./app
-    container_name: nestapi
-    ports:
-      - 3000:3000
-    expose:
-      - 3000
+  # app:
+  #   build: ./app
+  #   container_name: nestapi
+  #   ports:
+  #     - 3000:3000
