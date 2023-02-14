@@ -8,51 +8,7 @@ datasource db {
 }
 
 model User {
-  id                String           @id @default(uuid())
-  email             String           @unique
-  password          String
-  profile           Profile?
-  PetSittingOffer   PetSittingOffer? @relation(fields: [petSittingOfferId], references: [id])
-  petSittingOfferId String?
-}
-
-model Profile {
-  id          String      @id @default(uuid())
-  user        User        @relation(fields: [userId], references: [id])
-  userId      String      @unique
-  serviceRole serviceRole @default(Owner)
-  name        String      @unique
-  role        Role        @default(USER)
-  ownedPets   Pet[]
-}
-
-model Pet {
-  id      String   @id @default(uuid())
-  name    String
-  age     Int
-  spiece  String
-  userId  String   @unique
-  profile Profile? @relation(fields: [userId], references: [id])
-}
-
-model PetSittingOffer {
-  id          String   @id @default(uuid())
-  services    String[]
-  price       Int
-  city        String
-  startDate   DateTime
-  endDate     DateTime
-  createdDate DateTime @default(now())
-  requestedBy User[]
-  accepted    String[]
-}
-
-enum Role {
-  ADMIN
-  USER
-}
-
-enum serviceRole {
-  Sitter
-  Owner
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
 }
