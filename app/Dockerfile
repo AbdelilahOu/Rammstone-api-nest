@@ -11,6 +11,10 @@ COPY prisma ./prisma/
 # Install app dependencies
 RUN npm install
 
+# RUN npx prisma generate
+
+# RUN npx prisma db push --preview-feature
+
 COPY . .
 
 RUN npm run build

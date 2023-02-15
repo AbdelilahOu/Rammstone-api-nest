@@ -1,21 +1,23 @@
 version: '3.8'
 services:
-  nest-api:
-    container_name: nestjs-api
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 3000:3000
-    depends_on:
-      - postgres
-    env_file:
-      - .env
+  # nest-api:
+  #   container_name: nestjs-api
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 3000:3000
+  #   depends_on:
+  #     - postgres
+  #   env_file:
+  #     - .env
 
   postgres:
     image: postgres:15
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
+      - "POSTGRES_USER=abdelilah"
+      # - "POSTGRES_PASSWORD=NestApi12"
     container_name: postgres
     restart: always
     ports:

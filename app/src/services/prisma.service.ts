@@ -8,8 +8,8 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
     super({
       datasources: {
         db: {
-          // url: config.get('DATABASE_URL'),
-          url: 'postgres://abdelilah:NestApi12@localhost:5432/nest-api-db.postgres.database',
+          url: config.get('DATABASE_URL'),
+          // url: 'postgres://abdelilah:NestApi12@localhost:5432/nest-api-db.postgres.database',
         },
       },
     });
