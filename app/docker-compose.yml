@@ -3,7 +3,7 @@ services:
   nest-api:
     container_name: nestjs-api
     build:
-      context: ./app
+      context: .
       dockerfile: Dockerfile
     ports:
       - 3000:3000
