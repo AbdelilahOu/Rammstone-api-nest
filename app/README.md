@@ -7,6 +7,10 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
+## TO DO :
+
+prisma connection fails whene runing docker-compose eventho the postgres db is running
+
 ## Installation
 
 ```bash
